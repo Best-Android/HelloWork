@@ -4,14 +4,73 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.best.luchangdie.hellowork.MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical">
+
+    </TextView>
+
+    <RelativeLayout
+        android:id="@+id/layout_menu"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true">
+        <RadioGroup
+            android:id="@+id/rg_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/rb_new_good"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="新品"
+                android:gravity="center"
+                android:drawableTop="@drawable/menu_item_new_good_selected"
+                android:button="@null"
+                android:layout_weight="1"/>
+            <RadioButton
+                android:id="@+id/rb_boutique"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="精选"
+                android:gravity="center"
+                android:drawableTop="@drawable/menu_item_boutique_selected"
+                android:button="@null"
+                android:layout_weight="1"/>
+            <RadioButton
+                android:id="@+id/rb_cart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="购物车"
+                android:gravity="center"
+                android:drawableTop="@drawable/menu_item_cart_selected"
+                android:button="@null"
+                android:layout_weight="1"/>
+            <RadioButton
+                android:id="@+id/rb_personal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="个人中心"
+                android:gravity="center"
+                android:drawableTop="@drawable/menu_item_personal_center_selected"
+                android:button="@null"
+                android:layout_weight="1"/>
+        </RadioGroup>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_fragment"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:orientation="horizontal"
+        android:layout_below="@id/tv_title"
+        android:layout_above="@id/layout_menu">
+    </LinearLayout>
+
 </RelativeLayout>
