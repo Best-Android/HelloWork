@@ -117,16 +117,16 @@ public class Results {
     @Override
     public String toString() {
         return "Results{" +
-                "_id='" + _id + '\'' +
-                ", createdAt='" + createdAt + '\'' +
-                ", desc='" + desc + '\'' +
-                ", images=" + images +
-                ", publishedAt='" + publishedAt + '\'' +
-                ", source='" + source + '\'' +
-                ", type='" + type + '\'' +
-                ", url='" + url + '\'' +
-                ", used=" + used +
-                ", who='" + who + '\'' +
+                "_id='" + _id +","+ '\n' +
+                "createdAt='" + createdAt +","+  '\n' +
+                "desc='" + desc +","+  '\n' +
+                "images=" + images +","+ '\n' +
+                "publishedAt='" + publishedAt + ","+ '\n' +
+                "source='" + source + ","+ '\n' +
+                "type='" + type + ","+ '\n' +
+                "url='" + url +","+  '\n' +
+                "used=" + used +","+ '\n'+
+                "who='" + who + ","+ '\n' +
                 '}';
     }
 }
