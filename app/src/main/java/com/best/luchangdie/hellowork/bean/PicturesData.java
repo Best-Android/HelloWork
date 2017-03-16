@@ -27,30 +27,7 @@ public class PicturesData {
         this.results = results;
     }
 
-    public boolean isError() {
-        return error;
-    }
-
-    public void setError(boolean error) {
-        this.error = error;
-    }
-
-    public List<Results> getResults() {
-        return results;
-    }
-
-    public void setResults(List<Results> results) {
-        this.results = results;
-    }
-
-    @Override
-    public String toString() {
-        return "PicturesData{" +
-                "error=" + error +
-                ", results=" + results +
-                '}';
-    }
-    public void parseJson(String json) {
+    public static PicturesData parseJson(String json) {
         PicturesData picturesData = null;
         try {
             JSONObject jsonObject = new JSONObject(json);
@@ -88,5 +65,30 @@ public class PicturesData {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        return picturesData;
+    }
+
+    public boolean isError() {
+        return error;
+    }
+
+    public void setError(boolean error) {
+        this.error = error;
+    }
+
+    public List<Results> getResults() {
+        return results;
+    }
+
+    public void setResults(List<Results> results) {
+        this.results = results;
+    }
+
+    @Override
+    public String toString() {
+        return "PicturesData{" +
+                "error=" + error +
+                ", results=" + results +
+                '}';
     }
 }

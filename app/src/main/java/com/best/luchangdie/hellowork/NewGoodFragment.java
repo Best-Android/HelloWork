@@ -3,6 +3,7 @@ package com.best.luchangdie.hellowork;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,18 +31,21 @@ public class NewGoodFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_new_good, container, false);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         OkHttpUtils.get().url(url).build().execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
 
             }
-
             @Override
             public void onResponse(String response, int id) {
-                PicturesData pictures = new PicturesData();
-                pictures.parseJson(response);
+                PicturesData.parseJson(response);
             }
         });
-        return inflater.inflate(R.layout.fragment_new_good, container, false);
     }
 }
