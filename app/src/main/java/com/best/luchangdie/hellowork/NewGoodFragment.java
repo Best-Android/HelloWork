@@ -44,7 +44,7 @@ public class NewGoodFragment extends Fragment {
             }
             @Override
             public void onResponse(String response, int id) {
-                PicturesData.parseJson(response);
+                PicturesData picturesData = PicturesData.parseJson(response);
             }
         });
     }
