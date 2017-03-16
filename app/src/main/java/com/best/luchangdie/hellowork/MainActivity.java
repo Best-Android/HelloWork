@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Fragment personalFragment = new PersonalFragment();
     Fragment mTempFragment = newGoodFragment;
 
-    private MyApplication myApplication;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rbCart.setOnClickListener(this);
         rbPersonal.setOnClickListener(this);
         getSupportFragmentManager().beginTransaction().add(R.id.layout_fragment,newGoodFragment).commit();
-        myApplication = (MyApplication) getApplication();
     }
 
     public void switchContent (Fragment fragment) {
