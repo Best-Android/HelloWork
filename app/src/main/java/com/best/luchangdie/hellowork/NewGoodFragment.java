@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,26 +37,26 @@ public class NewGoodFragment extends Fragment {
     final static int ACTION_DOWNLOAD = 0;
     final static int ACTION_PULL_DOWN = 1;
     final static int ACTION_PULL_UP = 2;
-    String url = "http://gank.io/api/data/Android/10/1";
 
+    private final static String ROOT_URL = "http://gank.io/api/data/Android/10/";
+    private static final String TAG = "lcd";
     @BindView(R.id.tvRefreshHint)
     TextView tvRefreshHint;
     @BindView(R.id.rvPicture)
     RecyclerView rvPicture;
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
-
     ArrayList<Results> mPicturesList;
     PicturesAdapter mAdapter;
     LinearLayoutManager mLayoutManager;
-    int mPageId;
+    int mPageId = 1;
     int mNewState;
     Unbinder unbinder;
+
 
     public NewGoodFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,15 +76,25 @@ public class NewGoodFragment extends Fragment {
 
     private void setPullUpListener() {
         rvPicture.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            int lastPosition;
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 mNewState = newState;
-                int lastPosition = mLayoutManager.findLastVisibleItemPosition();
+                lastPosition = mLayoutManager.findLastVisibleItemPosition();
                 if (lastPosition >= mAdapter.getItemCount() - 1 && newState == RecyclerView.SCROLL_STATE_IDLE && mAdapter.isMore()) {
                     mPageId++;
                     downloadData(ACTION_PULL_UP,mPageId);
                 }
+                if (newState != RecyclerView.SCROLL_STATE_DRAGGING) {
+                    mAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                lastPosition = mLayoutManager.findLastVisibleItemPosition();
             }
         });
     }
@@ -92,9 +103,10 @@ public class NewGoodFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPageId = 1;
                 swipeRefreshLayout.setEnabled(true);
                 swipeRefreshLayout.setRefreshing(true);
+                tvRefreshHint.setVisibility(View.VISIBLE);
+                mPageId = 1;
                 downloadData(ACTION_PULL_DOWN,mPageId);
             }
         });
@@ -115,31 +127,37 @@ public class NewGoodFragment extends Fragment {
     }
 
     private void downloadData(final int actionDown , int pageId) {
+        Log.d(TAG, "downloadData: " + actionDown + ", " + pageId);
+        String url = ROOT_URL + pageId;
+        Log.d(TAG, "downloadData: " + url);
         OkHttpUtils.get().url(url).build().execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-
+                swipeRefreshLayout.setRefreshing(false);
+                Log.d(TAG, "onError: " + e.getMessage());
             }
 
             @Override
             public void onResponse(String response, int id) {
                 PicturesData picturesData = PicturesData.parseJson(response);
                 List<Results> list = picturesData.getResults();
-                mAdapter.initData(list);
+                mAdapter.setMore(list != null && list.size() > 0);
                 if (!mAdapter.isMore()) {
                     if (actionDown == ACTION_PULL_UP) {
                         mAdapter.setFooter("没有更多数据");
                     }
                     return;
                 }
-                mAdapter.setFooter("加载更多数据");
                 switch (actionDown) {
                     case ACTION_DOWNLOAD:
                         mAdapter.initData(list);
+                        mAdapter.setFooter("加载更多数据");
                         break;
                     case ACTION_PULL_DOWN:
                         mAdapter.initData(list);
+                        mAdapter.setFooter("加载更多数据");
                         swipeRefreshLayout.setRefreshing(false);
+                        tvRefreshHint.setVisibility(View.GONE);
                         break;
                     case ACTION_PULL_UP:
                         mAdapter.addData(list);
