@@ -2,6 +2,7 @@ package com.best.luchangdie.hellowork;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.best.luchangdie.hellowork.bean.PicturesData;
@@ -174,6 +176,7 @@ public class NewGoodFragment extends Fragment {
     }
 
     class PicturesViewHolder extends RecyclerView.ViewHolder {
+        RelativeLayout itemPicture;
         ImageView ivImage;
         TextView tvDesc;
         TextView tvWho;
@@ -181,10 +184,19 @@ public class NewGoodFragment extends Fragment {
 
         public PicturesViewHolder(View itemView) {
             super(itemView);
+            itemPicture = (RelativeLayout) itemView.findViewById(R.id.itemPicture);
             ivImage = (ImageView) itemView.findViewById(R.id.ivImage);
             tvDesc = (TextView) itemView.findViewById(R.id.tvDesc);
             tvWho = (TextView) itemView.findViewById(R.id.tvWho);
             tvCreatedAt = (TextView) itemView.findViewById(R.id.tvCreatedAt);
+            itemPicture.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Results result = (Results) v.getTag();
+                    String url = result.getUrl();
+                    startActivity(new Intent(getContext(), WebViewActivity.class).putExtra("url", url));
+                }
+            });
         }
     }
     class FooterViewHolder extends RecyclerView.ViewHolder {
@@ -254,6 +266,7 @@ public class NewGoodFragment extends Fragment {
             if (picturesData.getImages().size() > 0) {
                 Glide.with(context).load(picturesData.getImages().get(0)).into(((PicturesViewHolder) holder).ivImage);
             }
+            picturesViewHolder.itemPicture.setTag(picturesData);
         }
 
         @Override
