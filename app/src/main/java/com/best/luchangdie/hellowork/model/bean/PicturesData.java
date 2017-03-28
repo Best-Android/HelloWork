@@ -1,4 +1,4 @@
-package com.best.luchangdie.hellowork.bean;
+package com.best.luchangdie.hellowork.model.bean;
 
 import android.util.Log;
 
@@ -9,7 +9,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.best.luchangdie.hellowork.MyApplication.TAG;
+import static com.best.luchangdie.hellowork.model.application.MyApplication.TAG;
 
 /**
  * Created by Administrator on 2017/3/13.

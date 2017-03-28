@@ -1,8 +1,10 @@
-package com.best.luchangdie.hellowork;
+package com.best.luchangdie.hellowork.view.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebView;
+
+import com.best.luchangdie.hellowork.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -1,4 +1,4 @@
-package com.best.luchangdie.hellowork;
+package com.best.luchangdie.hellowork.model.application;
 
 import android.app.Application;
 

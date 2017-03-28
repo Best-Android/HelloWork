@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.best.luchangdie.hellowork.BoutiqueFragment">
+    tools:context="com.best.luchangdie.hellowork.view.fragment.BoutiqueFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

@@ -1,4 +1,4 @@
-package com.best.luchangdie.hellowork.bean;
+package com.best.luchangdie.hellowork.model.bean;
 
 import java.util.List;
 

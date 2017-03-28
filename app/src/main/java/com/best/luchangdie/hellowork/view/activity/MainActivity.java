@@ -1,4 +1,4 @@
-package com.best.luchangdie.hellowork;
+package com.best.luchangdie.hellowork.view.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,6 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+
+import com.best.luchangdie.hellowork.R;
+import com.best.luchangdie.hellowork.view.fragment.BoutiqueFragment;
+import com.best.luchangdie.hellowork.view.fragment.CartFragment;
+import com.best.luchangdie.hellowork.view.fragment.NewGoodFragment;
+import com.best.luchangdie.hellowork.view.fragment.PersonalFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

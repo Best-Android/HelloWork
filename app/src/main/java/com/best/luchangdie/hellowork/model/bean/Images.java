@@ -1,4 +1,4 @@
-package com.best.luchangdie.hellowork.bean;
+package com.best.luchangdie.hellowork.model.bean;
 
 /**
  * Created by Administrator on 2017/3/15.
